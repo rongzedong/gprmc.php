@@ -34,7 +34,7 @@
 * echo "DATE: " . $rmc->datetime;
 * echo "LAT: " . $rmc->lat;
 * echo "LONG: " . $rmc->long;
-* echo "SPEED: " . $rmc->speed;
+* echo "SPEED: " . $rmc->speed; // km
 * echo "DIRECT: " . $rmc->direction;
 */
 class GPRMC
@@ -47,7 +47,8 @@ class GPRMC
   public $datetime;
   public $lat;
   public $long;
-  public $speed;
+  public $speed; // km
+  public $speed_knot; // knot
   public $direction;
   public $angle;
 
@@ -64,6 +65,7 @@ class GPRMC
     $this->RMC['lat'] = $this->lat = $this->degree2decimal($meta[3], $meta[4]);
     $this->RMC['long'] = $this->long = $this->degree2decimal($meta[5], $meta[6]);
     $this->RMC['speed'] = $this->speed = $this->_speed($meta[7]);
+    $this->RMC['speed_knot'] = $this->speed_knot = $meta[7];
     $this->RMC['direction'] = $this->direction = $this->_direction($meta[8]);
     $this->RMC['angle'] = $this->angle = $meta[8];
   }
